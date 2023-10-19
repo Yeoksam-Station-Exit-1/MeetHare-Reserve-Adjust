@@ -19,7 +19,7 @@
     // 우리는 VSCode에서의 설정 값을 수정
     "vscode": {
       // Extensions에서 원하는 Extension 클릭 후, 톱니바퀴 버튼을 눌러 Extension ID 값 복붙
-      "extensions": ["vscjava.vscode-java-pack", "vmware.vscode-boot-dev-pack"]
+      "extensions": ["vscjava.vscode-java-pack", "vmware.vscode-boot-dev-pack", "vscjava.vscode-gradle"]
     }
   }
 }
