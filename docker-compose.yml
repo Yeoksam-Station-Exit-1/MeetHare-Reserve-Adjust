@@ -1,0 +1,33 @@
+services:
+  spring-boot:
+    image: openjdk:11
+    restart: always
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/workspace
+    environment:
+      - TZ=Asia/Seoul
+      - LC_ALL:en_US.UTF-8
+    command: sleep infinity
+
+  mysql:
+    image: mysql:8.0.32
+    restart: always
+    volumes:
+      - ./mysql/conf.d:/etc/mysql/conf.d:ro
+      - ./mysql/data:/var/lib/mysql:rw
+      - ./mysql/initdb.d:/docker-entrypoint-initdb.d:ro
+    environment:
+      - MYSQL_HOST=localhost
+      - MYSQL_PORT=3306
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=meethare
+      - MYSQL_USER=ssafy
+      - MYSQL_PASSWORD=ssafy123
+      - TZ=Asia/Seoul
+      - LC_ALL:en_US.UTF-8
