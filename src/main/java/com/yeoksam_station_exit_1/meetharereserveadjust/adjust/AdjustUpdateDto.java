@@ -1,0 +1,24 @@
+package com.yeoksam_station_exit_1.meetharereserveadjust.adjust;
+
+import java.sql.Timestamp;
+import java.util.Objects;
+import java.util.stream.Stream;
+
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.Setter;
+
+@Data
+@Setter(AccessLevel.NONE)
+public class AdjustUpdateDto {
+
+  private String roomCode;
+  private Timestamp adjustTime;
+  private String adjustInfo;
+
+  public boolean isAdjustUpdateEmpty() {
+
+    return Stream.of(roomCode, adjustTime, adjustInfo)
+        .anyMatch(Objects::isNull);
+  }
+}
