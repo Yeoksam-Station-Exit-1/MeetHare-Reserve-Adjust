@@ -30,4 +30,9 @@ services:
       - MYSQL_USER="ssafy"
       - MYSQL_PASSWORD="ssafy123@"
       - TZ=Asia/Seoul
-      - LC_ALL:en_US.UTF-8
+    command:
+      - --init_connect="SET collation_connection = utf8mb4_unicode_ci"
+      - --init_connect="SET NAMES utf8mb4"
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --max_connections=500

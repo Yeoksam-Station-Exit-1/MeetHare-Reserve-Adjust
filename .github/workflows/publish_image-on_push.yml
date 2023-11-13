@@ -28,6 +28,12 @@ jobs:
           java-version: "11"
           cache: "gradle"
 
+      - name: Set YML
+        run: |
+          mkdir -p src/main/resources
+          echo "${{ secrets.APPLICATION_SECRET }}" | base64 --decode > src/main/resources/application-secret.yml
+          find src
+
       # Gradle Dependency 캐싱
       - name: Gradle Caching
         uses: actions/cache@v3
@@ -66,7 +72,7 @@ jobs:
           push: true
           # platforms: linux/amd64
           tags: |
-            tprogramer/meethare-reserve-adjust:latest
-            tprogramer/meethare-reserve-adjust:${{ steps.extract_version_name.outputs.version }}
+            tprogramer/meethare-location-recommend:latest
+            tprogramer/meethare-location-recommend:${{ steps.extract_version_name.outputs.version }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
