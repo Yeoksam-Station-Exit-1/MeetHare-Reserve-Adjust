@@ -69,10 +69,11 @@ public class AdjustController {
    * @return
    */
   @Operation(description = "특정 모임의 정산 정보 조회 메서드입니다.")
-  @GetMapping("{roomCode}")
-  public ResponseEntity<AdjustEntity> getAdjust(@PathVariable("roomCode") String roomCode) {
+  @GetMapping("{roomCode}/{adjustOwner}")
+  public ResponseEntity<AdjustEntity> getAdjust(@PathVariable("roomCode") String roomCode,
+      @PathVariable("adjustOwner") String adjustOwner) {
 
-    AdjustEntity adjustInfo = adjustService.getAdjust(roomCode);
+    AdjustEntity adjustInfo = adjustService.getAdjust(adjustOwner, roomCode);
 
     return new ResponseEntity<>(adjustInfo, HttpStatus.OK);
   }
@@ -84,10 +85,11 @@ public class AdjustController {
    * @return
    */
   @Operation(description = "특정 모임의 정산 정보 제거 메서드입니다.")
-  @DeleteMapping("{roomCode}")
-  public ResponseEntity<String> deleteAdjust(@PathVariable("roomCode") String roomCode) {
+  @DeleteMapping("{roomCode}/{adjustOwner}")
+  public ResponseEntity<String> deleteAdjust(@PathVariable("roomCode") String roomCode,
+      @PathVariable("adjustOwner") String adjustOwner) {
 
-    adjustService.deleteAdjust(roomCode);
+    adjustService.deleteAdjust(adjustOwner, roomCode);
 
     return new ResponseEntity<>(roomCode, HttpStatus.OK);
   }

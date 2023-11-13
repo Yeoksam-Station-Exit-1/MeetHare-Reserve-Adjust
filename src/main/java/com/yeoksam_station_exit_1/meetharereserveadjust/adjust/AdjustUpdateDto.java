@@ -13,12 +13,13 @@ import lombok.Setter;
 public class AdjustUpdateDto {
 
   private String roomCode;
-  private Timestamp adjustTime;
+  private String adjustOwner;
+  private int adjustAmount;
   private String adjustInfo;
 
   public boolean isAdjustUpdateEmpty() {
 
-    return Stream.of(roomCode, adjustTime, adjustInfo)
+    return Stream.of(roomCode, adjustAmount, adjustInfo)
         .anyMatch(Objects::isNull);
   }
 }

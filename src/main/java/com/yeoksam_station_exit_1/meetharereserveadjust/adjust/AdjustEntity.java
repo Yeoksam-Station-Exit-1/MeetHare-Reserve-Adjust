@@ -49,8 +49,11 @@ public class AdjustEntity {
   @Column(name = "room_code", nullable = false, updatable = false, unique = true)
   private String roomCode;
 
-  @Column(name = "adjust_time", nullable = false)
-  private Timestamp adjustTime;
+  @Column(name = "adjust_owner", nullable = false)
+  private String adjustOwner;
+
+  @Column(name = "adjust_amount", nullable = false)
+  private int adjustAmount;
 
   @Column(name = "adjust_info")
   private String adjustInfo;

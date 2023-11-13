@@ -4,9 +4,9 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AdjustRepository extends JpaRepository<AdjustEntity, String> {
+public interface AdjustRepository extends JpaRepository<AdjustEntity, Long> {
 
-  Optional<AdjustEntity> findByRoomCode(String roomCode);
+  Optional<AdjustEntity> findByAdjustOwnerAndRoomCode(String adjustOwner, String roomCode);
 
-  void deleteByRoomCode(String roomCode);
+  void deleteByAdjustOwnerAndRoomCode(String adjustOwner, String roomCode);
 }

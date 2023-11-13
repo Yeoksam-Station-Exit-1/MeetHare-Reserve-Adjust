@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ReserveRepository extends JpaRepository<ReserveEntity, String> {
+public interface ReserveRepository extends JpaRepository<ReserveEntity, Long> {
 
   Optional<ReserveEntity> findByRoomCode(String roomCode);
 

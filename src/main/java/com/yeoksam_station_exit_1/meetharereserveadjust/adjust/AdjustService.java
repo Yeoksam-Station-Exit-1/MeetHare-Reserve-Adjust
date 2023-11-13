@@ -28,13 +28,15 @@ public class AdjustService {
    */
   public void makeAdjust(AdjustMakeUpDto adjustMakeUpDto) throws Exception {
 
-    if (adjustRepository.findByRoomCode(adjustMakeUpDto.getRoomCode()).isPresent()) {
-      throw new Exception("해당 모임에 예약 정보가 이미 존재합니다.");
+    if (adjustRepository.findByAdjustOwnerAndRoomCode(adjustMakeUpDto.getAdjustOwner(), adjustMakeUpDto.getRoomCode())
+        .isPresent()) {
+      throw new Exception("해당 정산 정보가 이미 존재합니다.");
     }
 
     AdjustEntity adjust = AdjustEntity.builder()
         .roomCode(adjustMakeUpDto.getRoomCode())
-        .adjustTime(adjustMakeUpDto.getAdjustTime())
+        .adjustOwner(adjustMakeUpDto.getAdjustOwner())
+        .adjustAmount(adjustMakeUpDto.getAdjustAmount())
         .adjustInfo(adjustMakeUpDto.getAdjustInfo())
         .build();
 
@@ -55,9 +57,10 @@ public class AdjustService {
 
     String updateResult;
 
-    AdjustEntity existAdjust = getAdjust(updateData.getRoomCode());
+    AdjustEntity existAdjust = getAdjust(updateData.getAdjustOwner(), updateData.getRoomCode());
 
-    existAdjust.setAdjustTime(updateData.getAdjustTime());
+    existAdjust.setAdjustOwner(updateData.getAdjustOwner());
+    existAdjust.setAdjustAmount(updateData.getAdjustAmount());
     existAdjust.setAdjustInfo(updateData.getAdjustInfo());
 
     if (!ObjectUtils.isEmpty(existAdjust)) {
@@ -81,9 +84,9 @@ public class AdjustService {
    * @param roomCode
    * @return
    */
-  public AdjustEntity getAdjust(String roomCode) {
+  public AdjustEntity getAdjust(String adjustOwner, String roomCode) {
 
-    return adjustRepository.findByRoomCode(roomCode).get();
+    return adjustRepository.findByAdjustOwnerAndRoomCode(adjustOwner, roomCode).get();
   }
 
   /**
@@ -92,7 +95,7 @@ public class AdjustService {
    * 
    * @param roomCode
    */
-  public void deleteAdjust(String roomCode) {
-    adjustRepository.deleteByRoomCode(roomCode);
+  public void deleteAdjust(String adjustOwner, String roomCode) {
+    adjustRepository.deleteByAdjustOwnerAndRoomCode(adjustOwner, roomCode);
   }
 }
