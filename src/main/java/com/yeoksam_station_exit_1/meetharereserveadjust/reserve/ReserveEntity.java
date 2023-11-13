@@ -1,8 +1,11 @@
 package com.yeoksam_station_exit_1.meetharereserveadjust.reserve;
 
+import java.util.List;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -48,8 +51,9 @@ public class ReserveEntity {
   private String roomCode;
 
   @Column(name = "reserve_time", nullable = false)
-  private Timestamp reserveTime;
+  private LocalDate reserveTime;
 
-  @Column(name = "reserve_place", nullable = false)
-  private String reservePlace;
+  @Column(name = "reserve_members", nullable = false)
+  @ElementCollection
+  private List<String> reserveMembers;
 }

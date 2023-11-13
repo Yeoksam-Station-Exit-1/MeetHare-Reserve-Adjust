@@ -1,7 +1,7 @@
 package com.yeoksam_station_exit_1.meetharereserveadjust.reserve;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.List;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -14,12 +14,12 @@ import lombok.Setter;
 public class ReserveUpdateDto {
 
   private String roomCode;
-  private Timestamp reserveTime;
-  private String reservePlace;
+  private LocalDate reserveTime;
+  private List<String> reserveMembers;
 
   public boolean isReserveUpdateEmpty() {
 
-    return Stream.of(roomCode, reserveTime, reservePlace)
+    return Stream.of(roomCode, reserveTime, reserveMembers)
         .anyMatch(Objects::isNull);
   }
 }

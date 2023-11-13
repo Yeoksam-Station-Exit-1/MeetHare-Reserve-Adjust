@@ -1,8 +1,6 @@
 package com.yeoksam_station_exit_1.meetharereserveadjust.adjust;
 
 import java.sql.Timestamp;
-import java.util.Objects;
-import java.util.stream.Stream;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,4 +1,7 @@
 spring:
+  config:
+    import:
+      - classpath:application-secret.yml
   profiles:
     active: local
   jpa:
@@ -21,7 +24,7 @@ spring:
     activate:
       on-profile: local
   datasource:
-    url: jdbc:mysql://mysql:3306/meethare?createDatabaseIfNotExist=true
-    username: root
-    password: 1234
+    url: jdbc:mysql://${DB_URL}/reserve_adjust?createDatabaseIfNotExist=true
+    username: ${DB_ID}
+    password: ${DB_PW}
     driver-class-name: com.mysql.cj.jdbc.Driver

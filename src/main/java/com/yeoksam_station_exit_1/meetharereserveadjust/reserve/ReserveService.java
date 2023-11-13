@@ -37,7 +37,7 @@ public class ReserveService {
     ReserveEntity reserve = ReserveEntity.builder()
         .roomCode(reserveMakeUpDto.getRoomCode())
         .reserveTime(reserveMakeUpDto.getReserveTime())
-        .reservePlace(reserveMakeUpDto.getReservePlace())
+        .reserveMembers(reserveMakeUpDto.getReserveMembers())
         .build();
 
     reserveRepository.save(reserve);
@@ -60,7 +60,7 @@ public class ReserveService {
     ReserveEntity existReserve = getReserve(updateData.getRoomCode());
 
     existReserve.setReserveTime(updateData.getReserveTime());
-    existReserve.setReservePlace(updateData.getReservePlace());
+    existReserve.setReserveMembers(updateData.getReserveMembers());
 
     if (!ObjectUtils.isEmpty(existReserve)) {
 

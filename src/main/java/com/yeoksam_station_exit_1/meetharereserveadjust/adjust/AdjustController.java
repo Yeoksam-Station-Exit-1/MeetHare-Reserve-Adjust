@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@RequestMapping("api/adjust")
+@RequestMapping("adjust")
 @RestController
 @Tag(name = "Adjust", description = "정산 관련 API 입니다.")
 public class AdjustController {
