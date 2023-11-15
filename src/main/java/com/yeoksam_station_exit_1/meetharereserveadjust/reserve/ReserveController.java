@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("reserve")
 @RestController
@@ -37,7 +39,7 @@ public class ReserveController {
   public ResponseEntity<String> createReserve(@RequestBody ReserveMakeUpDto reserveMakeUpDto) throws Exception {
 
     reserveService.makeReserve(reserveMakeUpDto);
-
+    log.info("새로운 예약 등록 완료");
     return ResponseEntity.ok("예약 정보를 등록했습니다.");
   }
 

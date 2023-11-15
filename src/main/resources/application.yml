@@ -28,3 +28,5 @@ spring:
     username: ${DB_ID}
     password: ${DB_PW}
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+backenduri: https://cluster.meethare.site/

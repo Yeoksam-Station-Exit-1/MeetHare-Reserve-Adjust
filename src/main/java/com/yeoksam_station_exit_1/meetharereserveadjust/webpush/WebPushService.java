@@ -22,12 +22,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -90,18 +92,38 @@ public class WebPushService {
         sendNotification(subscription, msg);
       }
 
-      MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-      params.add("roomCode", reservation.getRoomCode());
-      HttpHeaders headers = new HttpHeaders();
-      HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
+      // MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+      // params.add("roomCode", reservation.getRoomCode());
+      // HttpHeaders headers = new HttpHeaders();
+      // headers.setContentType(MediaType.APPLICATION_JSON);
+      // HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params,
+      // headers);
 
-      RestTemplate rt = new RestTemplate();
+      // RestTemplate rt = new RestTemplate();
 
-      ResponseEntity<String> response = rt.exchange(
-          "http://meethare-user-manage.default.svc.cluster.local:8080/user-manage/room/tolivemap",
-          HttpMethod.POST,
-          entity,
-          String.class);
+      // ResponseEntity<String> response = rt.exchange(
+      // "https://cluster.meethare.site/user-manage/room/tolivemap",
+      // HttpMethod.POST,
+      // entity,
+      // String.class);
+
+      WebClient webClient = WebClient.builder()
+          .baseUrl("https://cluster.meethare.site")
+          .defaultHeader("Content-Type", "application/json")
+          .build();
+
+      notifyDTO data = notifyDTO.builder()
+          .roomCode(reservation.getRoomCode())
+          .build();
+
+      String responseEntity = webClient.post()
+          .uri("/user-manage/room/tolivemap")
+          .bodyValue(data)
+          .retrieve()
+          // .toBodilessEntity()
+          .bodyToMono(String.class)
+          .block();
+      log.info(responseEntity);
     }
 
   }
